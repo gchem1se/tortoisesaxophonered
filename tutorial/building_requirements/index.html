@@ -672,11 +672,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../peripherals_example_GPIO/" class="md-nav__link">
+      <a href="../mock_implementation_GPIO/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    GPIO Example
+    GPIO Mock implementation
     
   </span>
   
@@ -694,11 +694,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../peripherals_example_LPUART/" class="md-nav__link">
+      <a href="../custom_driver/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    LPUART Example
+    Custom drivers
     
   </span>
   
@@ -863,16 +863,22 @@
         <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">config</span><span class="w"> </span>ZETA_SOC
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nb">bool</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span>&lt;your-cpu-architecture&gt;<span class="w"> </span><span class="c1"># eg. ARM_V7M</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span>ZETA_UART<span class="w"> </span><span class="c1"># eg. ARM_V7M</span>
 </code></pre></div>
 2. <code>qemu/hw/arm/meson.build</code>
     - add a line like:
         <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">arm_ss</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">when</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;CONFIG_ZETA_SOC&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">if_true</span><span class="p">:</span><span class="w"> </span><span class="nb">files</span><span class="p">(</span><span class="s">&#39;zeta_soc.c&#39;</span><span class="p">))</span>
 </code></pre></div>
-3. <code>qemu/configs/devices/arm-softmmu/default.mak</code>
+3. <code>qemu/hw/char/Kconfig</code>
+    - add a line like:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">config</span><span class="w"> </span>S32K3X8_LPUART
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">bool</span>
+</code></pre></div>
+4. <code>qemu/configs/devices/arm-softmmu/default.mak</code>
     - Even if not mandatory, you can use this file to filter out some ARM boards <em>by default</em> (so that even the Kconfig system could not enable them back) from being compiled when the command is issued. In fact, this file contains a list of every possible machine model and SoC as defined in the Kconfig we saw above, just with switched to uppercase. 
     - If you want to do this, add these lines. 
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># CONFIG_MAZINGA=n</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># CONFIG_ZETA_SOC=n</span>
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># CONFIG_MAZINGA=n</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># CONFIG_ZETA_SOC=n</span>
 </code></pre></div>
         De-commenting them will result in filtering your custom board out of the build process.</p>
 <hr />
