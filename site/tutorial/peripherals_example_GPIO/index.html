@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../creating_board/">
+        <link rel="prev" href="../creating_peripherals/">
       
       
-        <link rel="next" href="../peripherals_example_GPIO/">
+        <link rel="next" href="../peripherals_example_LPUART/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Creating peripherals - CAOS 2024 Documentation</title>
+        <title>GPIO Example - CAOS 2024 Documentation</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#adding-a-custom-peripheral-to-a-soc-in-qemu" class="md-skip">
+        <a href="#gpio-mock-implementation" class="md-skip">
           Skip to content
         </a>
       
@@ -105,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Creating peripherals
+              GPIO Example
             
           </span>
         </div>
@@ -579,6 +579,28 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../creating_peripherals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating peripherals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -595,7 +617,7 @@
           
   
   <span class="md-ellipsis">
-    Creating peripherals
+    GPIO Example
     
   </span>
   
@@ -607,7 +629,7 @@
         
   
   <span class="md-ellipsis">
-    Creating peripherals
+    GPIO Example
     
   </span>
   
@@ -630,54 +652,129 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-adding-the-peripheral-to-kconfig" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Adding the Peripheral to Kconfig
+      Overview
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-adding-the-peripheral-to-the-soc-configuration" class="md-nav__link">
+  <a href="#mock-registers" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Adding the Peripheral to the SoC Configuration
+      Mock Registers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mock Registers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aliases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Explanation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-including-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Including Headers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-defining-the-led-pin" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Defining the LED Pin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-gpio-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. GPIO Initialization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-turning-the-led-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Turning the LED On
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-turning-the-led-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Turning the LED Off
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-checking-led-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Checking LED State
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-registering-the-peripheral-in-the-build-system" class="md-nav__link">
+  <a href="#why-a-mock-implementation" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Registering the Peripheral in the Build System
+      Why a Mock Implementation?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-implementing-the-peripheral-s32k3x8_usartc" class="md-nav__link">
+  <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Implementing the Peripheral (s32k3x8_usart.c)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-defining-memory-mapped-registers" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Defining Memory-Mapped Registers
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-registering-the-peripheral-type-in-qemu" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Registering the Peripheral Type in QEMU
+      Conclusion
     </span>
   </a>
   
@@ -687,28 +784,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../peripherals_example_GPIO/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    GPIO Example
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -792,54 +867,129 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-adding-the-peripheral-to-kconfig" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Adding the Peripheral to Kconfig
+      Overview
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-adding-the-peripheral-to-the-soc-configuration" class="md-nav__link">
+  <a href="#mock-registers" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Adding the Peripheral to the SoC Configuration
+      Mock Registers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mock Registers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aliases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Explanation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-including-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Including Headers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-defining-the-led-pin" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Defining the LED Pin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-gpio-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. GPIO Initialization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-turning-the-led-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Turning the LED On
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-turning-the-led-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Turning the LED Off
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-checking-led-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Checking LED State
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-registering-the-peripheral-in-the-build-system" class="md-nav__link">
+  <a href="#why-a-mock-implementation" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Registering the Peripheral in the Build System
+      Why a Mock Implementation?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-implementing-the-peripheral-s32k3x8_usartc" class="md-nav__link">
+  <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Implementing the Peripheral (s32k3x8_usart.c)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-defining-memory-mapped-registers" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Defining Memory-Mapped Registers
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-registering-the-peripheral-type-in-qemu" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Registering the Peripheral Type in QEMU
+      Conclusion
     </span>
   </a>
   
@@ -861,116 +1011,118 @@
 
 
 
-<h1 id="adding-a-custom-peripheral-to-a-soc-in-qemu">Adding a Custom Peripheral to a SoC in QEMU</h1>
-<p>The following six steps guide you through configuring and implementing the peripheral within QEMU.</p>
-<h2 id="1-adding-the-peripheral-to-kconfig">1. Adding the Peripheral to <code>Kconfig</code></h2>
-<p>QEMU requires that each new peripheral be explicitly defined in the build configuration. To do so:</p>
+<h1 id="gpio-mock-implementation">GPIO Mock Implementation</h1>
+<p>This document explains how the General Purpose Input/Output (GPIO) functionality is <strong>emulated</strong> in our QEMU-based environment for the <strong>S32K32X8</strong> platform. Since QEMU does not provide native GPIO support for this microcontroller out-of-the-box, we created a <strong>mock implementation</strong> to simulate basic GPIO behavior for testing and demonstration purposes.</p>
+<hr />
+<h2 id="overview">Overview</h2>
 <ul>
-<li>Open <code>qemu/hw/arm/Kconfig</code></li>
-<li>Add the following configuration line to register your peripheral:</li>
+<li><strong>File</strong>: <code>gpio.c</code></li>
+<li><strong>Header</strong>: <code>gpio.h</code></li>
+<li><strong>Purpose</strong>: Provide simple functions to emulate LED toggling and GPIO direction configuration in a QEMU environment.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="err">config</span><span class="w"> </span><span class="err">S32K3X8_USART</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="err">bool</span>
+<p>The code snippet creates <strong>mock registers</strong> and uses them to emulate reading and writing to GPIO pins.</p>
+<hr />
+<h2 id="mock-registers">Mock Registers</h2>
+<p>We define two <strong>volatile</strong> variables to simulate the registers usually provided by the MCU’s hardware:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">volatile</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">MOCK_GPIO_PDOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Mock Port Data Output Register</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">volatile</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">MOCK_GPIO_PDDR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Mock Port Data Direction Register</span>
 </code></pre></div>
-<p>This declares the new peripheral so it can be enabled during compilation.</p>
-<h2 id="2-adding-the-peripheral-to-the-soc-configuration">2. Adding the Peripheral to the SoC Configuration</h2>
-<p>To ensure the peripheral is included in the SoC configuration:</p>
-<ul>
-<li>Open <code>qemu/hw/char/Kconfig</code></li>
-<li>Modify the existing SoC definition to include the new peripheral:</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">config</span><span class="w"> </span><span class="err">S32K3X8_SOC</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="err">bool</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="err">select</span><span class="w"> </span><span class="err">ARM_V7M</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="err">select</span><span class="w"> </span><span class="err">S32K3X8_USART</span>
+<h3 id="aliases">Aliases</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#define GPIO_PDOR MOCK_GPIO_PDOR</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="cp">#define GPIO_PDDR MOCK_GPIO_PDDR</span>
 </code></pre></div>
-<p>This links the custom peripheral to the SoC, ensuring it is part of the compiled SoC definition.</p>
-<h2 id="3-registering-the-peripheral-in-the-build-system">3. Registering the Peripheral in the Build System</h2>
-<p>To integrate the peripheral into the QEMU build system:</p>
-<ul>
-<li>Open <code>qemu/hw/arm/meson.build</code></li>
-<li>Add the following line:</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">system_ss</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">when</span><span class="p">:</span> <span class="s1">&#39;CONFIG_S32K3X8_USART&#39;</span><span class="p">,</span> <span class="n">if_true</span><span class="p">:</span> <span class="n">files</span><span class="p">(</span><span class="s1">&#39;s32k3x8_usart.c&#39;</span><span class="p">))</span>
-</code></pre></div>
-<p>This ensures the source file for the peripheral is compiled when the <code>S32K3X8_USART</code> configuration option is enabled.</p>
-<h2 id="4-implementing-the-peripheral-s32k3x8_usartc">4. Implementing the Peripheral (<code>s32k3x8_usart.c</code>)</h2>
-<p>The new peripheral should be implemented as a C source file inside <code>qemu/hw/char/</code>. The file should include:</p>
-<ul>
-<li><strong>Initialization functions</strong>: Define how the peripheral is instantiated and registered in QEMU.</li>
-<li><strong>Read/Write functions</strong>: Handle access to memory-mapped registers.</li>
-<li><strong>Interrupt handling</strong>: Manage IRQs triggered by the peripheral.</li>
-<li><strong>QEMU integration</strong>: Use QEMU’s internal macros and functions for device emulation.</li>
-</ul>
-<p>The following header files should be included:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;qemu/osdep.h&quot;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hw/char/s32k3x8_lpuart.h&quot;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hw/irq.h&quot;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hw/qdev-properties.h&quot;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hw/qdev-properties-system.h&quot;</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;qemu/log.h&quot;</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;qemu/module.h&quot;</span>
-</code></pre></div>
-<p>A sample implementation should include functions for:</p>
-<ul>
-<li>Checking if the peripheral can receive data (<code>s32k3x8_usart_can_receive</code>)</li>
-<li>Receiving data (<code>s32k3x8_usart_receive</code>)</li>
-<li>Resetting the peripheral (<code>s32k3x8_usart_reset</code>)</li>
-<li>Handling register reads (<code>s32k3x8_usart_read</code>)</li>
-<li>Handling register writes (<code>s32k3x8_usart_write</code>)</li>
-<li>Registering memory-mapped regions</li>
-<li>Registering IRQs</li>
-</ul>
-<h2 id="5-defining-memory-mapped-registers">5. Defining Memory-Mapped Registers</h2>
-<p>The peripheral should expose registers through a memory-mapped interface. This is done using <code>MemoryRegionOps</code> in QEMU:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">MemoryRegionOps</span><span class="w"> </span><span class="n">s32k3x8_usart_ops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="p">.</span><span class="n">read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s32k3x8_usart_read</span><span class="p">,</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="p">.</span><span class="n">write</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s32k3x8_usart_write</span><span class="p">,</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="p">.</span><span class="n">endianness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEVICE_NATIVE_ENDIAN</span><span class="p">,</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">};</span>
-</code></pre></div>
-<p>The <code>read</code> and <code>write</code> functions handle access to registers based on the given offset (<code>addr</code>). These functions update internal state variables and trigger appropriate actions, such as setting flags or sending interrupts.</p>
-<h2 id="6-registering-the-peripheral-type-in-qemu">6. Registering the Peripheral Type in QEMU</h2>
-<p>Finally, the peripheral must be registered as a QEMU type so it can be instantiated in a SoC.</p>
-<ul>
-<li>Define the peripheral’s initialization functions:</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">s32k3x8_usart_init</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">S32K3X8LpuartState</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S32K3X8_USART</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">sysbus_init_irq</span><span class="p">(</span><span class="n">SYS_BUS_DEVICE</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">irq</span><span class="p">);</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">memory_region_init_io</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">mmio</span><span class="p">,</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">s32k3x8_usart_ops</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_S32K3X8_LPUART</span><span class="p">,</span><span class="w"> </span><span class="mh">0x400</span><span class="p">);</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">sysbus_init_mmio</span><span class="p">(</span><span class="n">SYS_BUS_DEVICE</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">mmio</span><span class="p">);</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">}</span>
+<p>These <code>#define</code> directives ensure that anywhere in the code we reference <code>GPIO_PDOR</code> or <code>GPIO_PDDR</code>, we are actually accessing our mock variables.</p>
+<hr />
+<h2 id="code-explanation">Code Explanation</h2>
+<h3 id="1-including-headers">1. Including Headers</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gpio.h&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 </code></pre></div>
 <ul>
-<li>Define how the device is realized:</li>
+<li><code>gpio.h</code> contains function prototypes and pin definitions.</li>
+<li><code>stdio.h</code> is used for basic I/O operations (optional).</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">s32k3x8_usart_realize</span><span class="p">(</span><span class="n">DeviceState</span><span class="w"> </span><span class="o">*</span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="o">**</span><span class="n">errp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">S32K3X8LpuartState</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S32K3X8_USART</span><span class="p">(</span><span class="n">dev</span><span class="p">);</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">qemu_chr_fe_set_handlers</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">chr</span><span class="p">,</span><span class="w"> </span><span class="n">s32k3x8_usart_can_receive</span><span class="p">,</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">                             </span><span class="n">s32k3x8_usart_receive</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">                             </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">}</span>
+<h3 id="2-defining-the-led-pin">2. Defining the LED Pin</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#define LED_PIN 3</span>
+</code></pre></div>
+<p>We assume the LED is connected to <strong>pin 3</strong>. Adjust this value to match your desired pin.</p>
+<h3 id="3-gpio-initialization">3. GPIO Initialization</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">GPIO_Init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">MOCK_GPIO_PDDR</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">LED_PIN</span><span class="p">);</span><span class="w"> </span><span class="c1">// Configure LED_PIN as output</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>Register the peripheral type:</li>
+<li>We <strong>set the direction</strong> of the <code>LED_PIN</code> as <strong>output</strong> by writing to <code>MOCK_GPIO_PDDR</code>.</li>
+<li><code>1 &lt;&lt; LED_PIN</code> shifts the bit corresponding to <code>LED_PIN</code> to the correct position.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">TypeInfo</span><span class="w"> </span><span class="n">s32k3x8_usart_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="p">.</span><span class="n">name</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="n">TYPE_S32K3X8_LPUART</span><span class="p">,</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="p">.</span><span class="n">parent</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">TYPE_SYS_BUS_DEVICE</span><span class="p">,</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="p">.</span><span class="n">instance_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">S32K3X8LpuartState</span><span class="p">),</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="p">.</span><span class="n">instance_init</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s32k3x8_usart_init</span><span class="p">,</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="p">.</span><span class="n">class_init</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">s32k3x8_usart_class_init</span><span class="p">,</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="p">};</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">s32k3x8_usart_register_types</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="n">type_register_static</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s32k3x8_usart_info</span><span class="p">);</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="p">}</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w"> </span><span class="n">type_init</span><span class="p">(</span><span class="n">s32k3x8_usart_register_types</span><span class="p">)</span>
+<h3 id="4-turning-the-led-on">4. Turning the LED On</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">LED_On</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">MOCK_GPIO_PDOR</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">LED_PIN</span><span class="p">);</span><span class="w"> </span><span class="c1">// Set LED_PIN high</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">}</span>
 </code></pre></div>
-<p>This process ensures that the peripheral is recognized as a valid QEMU device and can be instantiated in an emulated SoC.</p>
-<p>That's it! You have successfully added a custom peripheral to QEMU.</p>
+<ul>
+<li>We <strong>set the output bit</strong> of <code>LED_PIN</code> to <strong>1</strong> (high level) in <code>MOCK_GPIO_PDOR</code>.</li>
+</ul>
+<h3 id="5-turning-the-led-off">5. Turning the LED Off</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">LED_Off</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">MOCK_GPIO_PDOR</span><span class="w"> </span><span class="o">&amp;=</span><span class="w"> </span><span class="o">~</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">LED_PIN</span><span class="p">);</span><span class="w"> </span><span class="c1">// Set LED_PIN low</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>We <strong>clear the output bit</strong> of <code>LED_PIN</code> to <strong>0</strong> (low level) in <code>MOCK_GPIO_PDOR</code>.</li>
+</ul>
+<h3 id="6-checking-led-state">6. Checking LED State</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">LED_IsOn</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">MOCK_GPIO_PDOR</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">LED_PIN</span><span class="p">))</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>We <strong>read</strong> the current state of the <code>LED_PIN</code> by checking if the corresponding bit is set in <code>MOCK_GPIO_PDOR</code>.</li>
+<li>Returns <strong>1</strong> if the LED is on, <strong>0</strong> if off.</li>
+</ul>
+<hr />
+<h2 id="usage">Usage</h2>
+<ol>
+<li>
+<p><strong>Initialize the GPIO</strong><br />
+   Call <code>GPIO_Init()</code> once at the start of your program to configure the pin direction.</p>
+</li>
+<li>
+<p><strong>Turn LED On/Off</strong></p>
+</li>
+<li>
+<p><code>LED_On()</code> sets the LED pin high.</p>
+</li>
+<li>
+<p><code>LED_Off()</code> sets the LED pin low.</p>
+</li>
+<li>
+<p><strong>Check LED State</strong></p>
+</li>
+<li><code>LED_IsOn()</code> returns <strong>1</strong> if the LED pin is set, <strong>0</strong> otherwise.</li>
+</ol>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="n">GPIO_Init</span><span class="p">();</span><span class="w">         </span><span class="c1">// Configure the LED pin</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">LED_On</span><span class="p">();</span><span class="w">            </span><span class="c1">// Turn on the LED</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;LED State: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LED_IsOn</span><span class="p">());</span><span class="w"> </span><span class="c1">// Should print 1</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="n">LED_Off</span><span class="p">();</span><span class="w">           </span><span class="c1">// Turn off the LED</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;LED State: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LED_IsOn</span><span class="p">());</span><span class="w"> </span><span class="c1">// Should print 0</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="why-a-mock-implementation">Why a Mock Implementation?</h2>
+<p>In a real <strong>S32K3X8</strong> microcontroller, registers like <code>GPIO_PDOR</code> and <code>GPIO_PDDR</code> are mapped to hardware addresses. Under QEMU, these registers do not exist unless explicitly emulated. This mock approach:</p>
+<ul>
+<li><strong>Simulates</strong> the effect of writing to and reading from registers.</li>
+<li><strong>Enables</strong> basic testing of GPIO logic in unit tests or continuous integration pipelines without the actual hardware.</li>
+</ul>
+<hr />
+<h2 id="conclusion">Conclusion</h2>
+<p>The <strong>mock GPIO implementation</strong> provides a straightforward way to <strong>emulate</strong> reading and writing to GPIO pins within QEMU for the S32K3X8 platform. This allows you to <strong>test</strong> code behavior (e.g., turning LEDs on and off) before deploying to physical hardware, reducing development time and potential hardware-related issues.</p>
 
 
 
