@@ -1,0 +1,49 @@
+site_name: CAOS 2024 Documentation
+theme:
+  name: material
+  logo: icon.png
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - footnotes
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+  - Examples:
+      - Overview: examples/overview.md
+  - Tutorial:
+      - Before you begin: tutorial/before_you_begin.md
+      - Building requirements: tutorial/building_requirements.md
+      - Creating board: tutorial/creating_board.md
+      - Creating peripherals: tutorial/creating_peripherals.md
+      - GPIO Example: tutorial/peripherals_example_GPIO.md
+      - LPUART Example: tutorial/peripherals_example_LPUART.md
+      - Running FreeRTOS: tutorial/running_freeRTOS.md
