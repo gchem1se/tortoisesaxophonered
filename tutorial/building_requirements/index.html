@@ -238,7 +238,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../examples/overview/" class="md-tabs__link">
+        <a href="../../examples/example_led/" class="md-tabs__link">
           
   
   Examples
@@ -391,11 +391,33 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/overview/" class="md-nav__link">
+      <a href="../../examples/example_led/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Overview
+    Interactive led control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/example_morse_code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Morse code decoder implementation
     
   </span>
   
@@ -793,51 +815,71 @@
 <hr />
 <h3 id="configuring-the-build">Configuring the build</h3>
 <p>To allow QEMU's system to be built along with your modifications, you would have to modify some of the files related to the build process. </p>
-<p>From this moment on, let's pretend that:
-- you're trying to implement a machine called <em>mazinga</em>, which mounts the SoC <em>zeta</em>
-- you defined the machine in <code>qemu/hw/arm/mazinga.c</code> and/or <code>qemu/include/hw/arm/mazinga.h</code>
-- you defined the SoC in <code>qemu/hw/arm/zeta_soc.c</code> and/or <code>qemu/include/hw/arm/zeta_soc.h</code>
-- your board also has a custom peripheral, let's say a custom UART, that you defined in <code>qemu/hw/char/zeta_uart.c</code> and/or <code>qemu/include/hw/char/zeta_uart.h</code>.</p>
+<p>From this moment on, let's pretend that:</p>
+<ul>
+<li>you're trying to implement a machine called <em>mazinga</em>, which mounts the SoC <em>zeta</em></li>
+<li>you defined the machine in <code>qemu/hw/arm/mazinga.c</code> and/or <code>qemu/include/hw/arm/mazinga.h</code></li>
+<li>you defined the SoC in <code>qemu/hw/arm/zeta_soc.c</code> and/or <code>qemu/include/hw/arm/zeta_soc.h</code></li>
+<li>your board also has a custom peripheral, let's say a custom UART, that you defined in <code>qemu/hw/char/zeta_uart.c</code> and/or <code>qemu/include/hw/char/zeta_uart.h</code>.</li>
+</ul>
 <p>The files to modify are the ones of the Meson build system and the ones of the Kconfig configuration system, relative to the ARM board you just created:
-1. <code>qemu/hw/arm/Kconfig</code>
-    - add a line like:
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">system_ss</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">when</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;CONFIG_ZETA_UART&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">if_true</span><span class="p">:</span><span class="w"> </span><span class="nb">files</span><span class="p">(</span><span class="s">&#39;zeta_uart.c&#39;</span><span class="p">))</span>
-</code></pre></div>
-    - add the two <code>Config</code> clauses:
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">config</span><span class="w"> </span>MAZINGA
+1. <code>qemu/hw/arm/Kconfig</code></p>
+<ul>
+<li>add a line like:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">system_ss</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">when</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;CONFIG_ZETA_UART&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">if_true</span><span class="p">:</span><span class="w"> </span><span class="nb">files</span><span class="p">(</span><span class="s">&#39;zeta_uart.c&#39;</span><span class="p">))</span>
+</code></pre></div></li>
+<li>
+<p>add the two <code>Config</code> clauses:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">config</span><span class="w"> </span>MAZINGA
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nb">bool</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">default</span><span class="w"> </span>y
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">depends on</span><span class="w"> </span>TCG<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ARM
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span>ZETA_SOC
-</code></pre></div>
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">config</span><span class="w"> </span>ZETA_SOC
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">config</span><span class="w"> </span>ZETA_SOC
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nb">bool</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span>&lt;your-cpu-architecture&gt;<span class="w"> </span><span class="c1"># eg. ARM_V7M</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span>ZETA_UART<span class="w"> </span><span class="c1"># eg. ARM_V7M</span>
 </code></pre></div>
-2. <code>qemu/hw/arm/meson.build</code>
-    - add a line like:
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">arm_ss</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">when</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;CONFIG_ZETA_SOC&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">if_true</span><span class="p">:</span><span class="w"> </span><span class="nb">files</span><span class="p">(</span><span class="s">&#39;zeta_soc.c&#39;</span><span class="p">))</span>
-</code></pre></div>
-3. <code>qemu/hw/char/Kconfig</code>
-    - add a line like:
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">config</span><span class="w"> </span>S32K3X8_LPUART
+</li>
+<li>
+<p><code>qemu/hw/arm/meson.build</code></p>
+<ul>
+<li>add a line like:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">arm_ss</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">when</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;CONFIG_ZETA_SOC&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">if_true</span><span class="p">:</span><span class="w"> </span><span class="nb">files</span><span class="p">(</span><span class="s">&#39;zeta_soc.c&#39;</span><span class="p">))</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>qemu/hw/char/Kconfig</code><ul>
+<li>add a line like:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">config</span><span class="w"> </span>S32K3X8_LPUART
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">bool</span>
-</code></pre></div>
-4. <code>qemu/configs/devices/arm-softmmu/default.mak</code>
-    - Even if not mandatory, you can use this file to filter out some ARM boards <em>by default</em> (so that even the Kconfig system could not enable them back) from being compiled when the command is issued. In fact, this file contains a list of every possible machine model and SoC as defined in the Kconfig we saw above, just with switched to uppercase. 
-    - If you want to do this, add these lines. 
-        <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># CONFIG_MAZINGA=n</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>qemu/configs/devices/arm-softmmu/default.mak</code><ul>
+<li>Even if not mandatory, you can use this file to filter out some ARM boards <em>by default</em> (so that even the Kconfig system could not enable them back) from being compiled when the command is issued. In fact, this file contains a list of every possible machine model and SoC as defined in the Kconfig we saw above, just with switched to uppercase. </li>
+<li>If you want to do this, add these lines. 
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># CONFIG_MAZINGA=n</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># CONFIG_ZETA_SOC=n</span>
 </code></pre></div>
-        De-commenting them will result in filtering your custom board out of the build process.</p>
+    De-commenting them will result in filtering your custom board out of the build process.</li>
+</ul>
+</li>
+</ul>
 <hr />
 <h3 id="launching-the-build-process">Launching the build process</h3>
 <ol>
-<li>If it's the first time you build QEMU by yourself, you likely have no directory named <code>qemu/build</code>. If that's the case, run the <code>qemu/configure</code> script.</li>
+<li>
+<p>If it's the first time you build QEMU by yourself, you likely have no directory named <code>qemu/build</code>. If that's the case, run the <code>qemu/configure</code> script.</p>
+<ul>
 <li>If you want to specify only ARM targets, use <code>./configure --target-list=arm-softmmu</code></li>
 <li>You don't have to run this script every time you launch a new build, but only the first time ever, except if you want to change the compilation targets.</li>
-<li><code>cd</code> inside the <code>build</code> folder and Launch the build by issuing <code>make -j$(nproc)</code> or <code>ninja -C build</code>. Both commands use multi-threading to make the compilation faster.</li>
+</ul>
+</li>
+<li>
+<p><code>cd</code> inside the <code>build</code> folder and Launch the build by issuing <code>make -j$(nproc)</code> or <code>ninja -C build</code>. Both commands use multi-threading to make the compilation faster.</p>
+</li>
 <li>Once built, you can run your custom version from the <code>build</code> directory (eg. <code>./build/qemu-system-arm -M virt -cpu cortex-a15 -nographic</code>)</li>
 </ol>
 

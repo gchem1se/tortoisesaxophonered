@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../building_requirements/">
+        <link rel="prev" href="../../getting_started/">
       
       
-        <link rel="next" href="../creating_peripherals/">
+        <link rel="next" href="../example_morse_code/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Creating board - CAOS 2024 Documentation</title>
+        <title>Interactive led control - CAOS 2024 Documentation</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#adding-a-custom-board-in-qemu" class="md-skip">
+        <a href="#how-it-works" class="md-skip">
           Skip to content
         </a>
       
@@ -105,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Creating board
+              Interactive led control
             
           </span>
         </div>
@@ -234,11 +234,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../examples/example_led/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   Examples
@@ -252,13 +254,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../before_you_begin/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../tutorial/before_you_begin/" class="md-tabs__link">
           
   
   Tutorial
@@ -347,25 +347,30 @@
       
   
   
+    
   
   
+  
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -377,7 +382,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Examples
@@ -388,10 +393,29 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../examples/example_led/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Interactive led control
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -401,6 +425,51 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How It Works?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-the-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing the Example
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -413,7 +482,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/example_morse_code/" class="md-nav__link">
+      <a href="../example_morse_code/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -439,30 +508,25 @@
       
   
   
-    
   
   
-  
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -474,7 +538,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Tutorial
@@ -488,7 +552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../before_you_begin/" class="md-nav__link">
+      <a href="../../tutorial/before_you_begin/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -510,7 +574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../building_requirements/" class="md-nav__link">
+      <a href="../../tutorial/building_requirements/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -529,31 +593,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Creating board
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../tutorial/creating_board/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -563,53 +606,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#machine-and-soc" class="md-nav__link">
-    <span class="md-ellipsis">
-      Machine and SoC
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#creating-the-machine" class="md-nav__link">
-    <span class="md-ellipsis">
-      Creating the machine
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#creating-the-soc" class="md-nav__link">
-    <span class="md-ellipsis">
-      Creating the SoC
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -622,7 +618,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../creating_peripherals/" class="md-nav__link">
+      <a href="../../tutorial/creating_peripherals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -644,7 +640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mock_implementation_GPIO/" class="md-nav__link">
+      <a href="../../tutorial/mock_implementation_GPIO/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -666,7 +662,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custom_driver/" class="md-nav__link">
+      <a href="../../tutorial/custom_driver/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -688,7 +684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../running_freeRTOS/" class="md-nav__link">
+      <a href="../../tutorial/running_freeRTOS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -727,8 +723,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -737,27 +731,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#machine-and-soc" class="md-nav__link">
+  <a href="#how-it-works" class="md-nav__link">
     <span class="md-ellipsis">
-      Machine and SoC
+      How It Works?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#creating-the-machine" class="md-nav__link">
+  <a href="#code-structure" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the machine
+      Code Structure
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#creating-the-soc" class="md-nav__link">
+  <a href="#testing-the-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the SoC
+      Testing the Example
     </span>
   </a>
   
@@ -779,115 +773,62 @@
 
 
 
-<h1 id="adding-a-custom-board-in-qemu">Adding a custom board in QEMU</h1>
-<p>This section explains how to add a custom ARM-based board to QEMU. We’ll guide you through the steps to define your board and make it ready for use in the QEMU emulator.</p>
+  <h1>Interactive led control</h1>
+
+<p>The example demonstrates the integration of all these components in a practical application. The example allows users to control an LED through keyboard input.</p>
 <blockquote>
-<p>⚠️ Before you begin...</p>
-<p>We highly suggest you to dive in <a href="../before_you_begin/">QEMU fundamentals</a> and <a href="../building_requirements/">its building requirements</a> before beginning this journey!</p>
+<p>ℹ️ Note</p>
+<p>for information about how to compile the code refer to <a href="../../getting_started/">Getting Started</a></p>
 </blockquote>
-<hr />
-<h3 id="machine-and-soc"><em>Machine</em> and <em>SoC</em></h3>
-<p>While it is technically possible to implement everything within a single C file, it is generally advisable to separate concerns: using header files for declarations and splitting implementation into multiple C files.
-In particular, we suggest to split the implementation of the new board into two coding steps (and therefore, into two files): </p>
-<ul>
-<li>writing a <strong>high-level definition of the new board</strong> (which we'll call <em>machine</em> from this point on, to align with QEMU's naming system)<ul>
-<li>in this file we will address the implementation of something that QEMU will recognize as a <em>Machine</em>, therefore permitting us to run commands such as <code>qemu-system-arm -M &lt;our-new-machine&gt; -k kernel.elf</code>. Here we will mainly specify the valid CPU architecture that can be used with the <code>-cpu</code> argument and the clock frequency of the board.</li>
-</ul>
-</li>
-<li>writing a <strong>low-level definition</strong> of the <em>SoC</em> the Machine mounts. <ul>
-<li>From our perspective, the SoC definition file will specify memory regions as well as every peripheral our custom board should be equipped with.</li>
-</ul>
-</li>
-</ul>
-<p>Both of the files are to be inserted in the ARM boards' folder, which is <code>qemu/hw/arm</code>.</p>
-<p>In our opinion, this approach alignes with QEMU's internal logic and mimicks the structure of pre-implemented code.</p>
-<p>For example, the <em>netduino2</em> machine, which is implemented in <code>qemu/hw/arm/netduino2.c</code>, is a high-level definition of a board mounting the <em>stm32f205</em> SoC, which is defined at <code>qemu/hw/arm/stm32f205_soc.c</code> and <code>qemu/include/hw/arm/stm32f205_soc.h</code>.</p>
-<hr />
-<h3 id="creating-the-machine">Creating the machine</h3>
-<ul>
-<li>
-<p><code>qemu/hw/arm/&lt;your-board&gt;.c</code></p>
-<ul>
-<li>This file contains only the high-level model of the board being implemented. Here we will define the system clock frequency, an <code>&lt;your-board&gt;_init</code> function and a <code>&lt;your-board&gt;_machine_init</code> function. </li>
-<li>The first one has prototype:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">board</span><span class="o">&gt;</span><span class="n">_init</span><span class="p">(</span><span class="n">MachineState</span><span class="w"> </span><span class="o">*</span><span class="n">machine</span><span class="p">)</span>
-</code></pre></div>
-and will instantiate the SoC entity and wire up a system clock source to the SoC. This is equivalent to the constructor of the instance/State of the machine in the QOM.
-Moreover, this function will also load the kernel image given by the user by means of calling a function specific for your architecture (eg. <code>armv7m_load_kernel</code>).</li>
-<li>
-<p>The second one has prototype:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">board</span><span class="o">&gt;</span><span class="n">_machine_init</span><span class="p">(</span><span class="n">MachineClass</span><span class="w"> </span><span class="o">*</span><span class="n">mc</span><span class="p">)</span>
-</code></pre></div>
-this will bind the <code>_init</code> as constructor for the machine object, along with adding a description for your board and the valid CPU types it can mount. It's equivalent to the <code>_class_init</code> functions of the QOM.</p>
-</li>
-<li>
-<p>In the end, we will add a call to the <code>DEFINE_MACHINE</code> macro such as:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">DEFINE_MACHINE</span><span class="p">(</span><span class="s">&quot;&lt;your-board&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">board</span><span class="o">&gt;</span><span class="n">_machine_init</span><span class="p">)</span>
-</code></pre></div>
-which will register the machine Type into QEMU and link the <code>_machine_init</code> function as its Class constructor.</p>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>ℹ️ Our code</p>
-<p>You can find our implementation of a custom machine in <code>qemu/hw/arm/nxp_s32k3x8evb.c</code></p>
-</blockquote>
-<h3 id="creating-the-soc">Creating the SoC</h3>
+<h3 id="how-it-works">How It Works?</h3>
 <ol>
 <li>
-<p><code>qemu/include/hw/arm/&lt;your-soc&gt;.h</code></p>
+<p><strong>Serial Communication</strong>:</p>
 <ul>
-<li>this file will declare global variables to be referred to in files that will actually construct our board, such as:<ul>
-<li>base addresses and sizes of memory regions</li>
-<li>base addresses of any peripheral you would want to implement</li>
-</ul>
-</li>
-<li>In this file you will also use a macro for the QEMU internal system to register the SoC as an internal Type.</li>
-<li>
-<p>in the include clauses of this file it's important to highlight the file containing the definition of the CPU architecture, which we will not implement from scratch. 
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hw/arm/armv7m.h&quot;</span><span class="c1"> // or your architecture of choice</span>
-</code></pre></div></p>
-<blockquote>
-<p>ℹ️ CPU implementation from scratch</p>
-<p>If you need to implement a whole new CPU architecture beside the ones already supported in QEMU, refer to <a href="https://fgoehler.com/projects/qemu-avr32/">this</a>.</p>
-</blockquote>
-</li>
-<li>
-<p>This file's major purpose is, in the end, to declare a <code>State</code> struct, containing all the attributes of our SoC: memory regions, the state of every attached peripheral and input lines for external sources of system/reference clocks. The <code>Type</code> and <code>Class</code> related to this will be instead implemented and registered in the <code>.c</code> file.</p>
-</li>
+<li>Users can send commands through the serial interface</li>
+<li>The LPUART peripheral is configured to receive keyboard input</li>
 </ul>
 </li>
 <li>
-<p><code>qemu/hw/arm/&lt;your-soc&gt;.c</code></p>
+<p><strong>LED Control</strong>:</p>
 <ul>
-<li>this file will define the class and type of the SoC in depth. In particular, we will define three functions:
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">soc</span><span class="o">&gt;</span><span class="n">_initfn</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="p">)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">soc</span><span class="o">&gt;</span><span class="n">_realize</span><span class="p">(</span><span class="n">DeviceState</span><span class="w"> </span><span class="o">*</span><span class="n">dev_soc</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="o">**</span><span class="n">errp</span><span class="p">)</span>
-</code></pre></div><ul>
-<li>the two are both initialization functions, but the first one is called early in the entity's lifecycle and it's a sort of "shallow initialization" of the device. Doesn't yet allocate or configure hardware resources (like memory regions or IRQs).</li>
-<li>the second one is the longest function. It does a sort of "deep" initialization of the SoC and will "do the dirty work", in particular:<ul>
-<li>initialize clock sources that were not wired up by the machine code</li>
-<li>initialize memory regions</li>
-<li>realizes and connects the CPU to the SoC</li>
-<li>realizes and connects peripherals to the SoC</li>
-<li>connects IRQ lines of peripherals to the interrupt controller (in our ARM-based board, to the NVIC).</li>
+<li>The GPIO peripheral is configured to control the LED</li>
+<li>The LED state can be toggled based on user input</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>moreover, in the same file we will:<ul>
-<li>declare the <code>_class_init</code> function, such as <code>static void &lt;your-soc&gt;_class_init(ObjectClass *class, void *data)</code>, which will bind only the <code>realize</code> method to the entity</li>
-<li>register the Type in the usual way, by means of calling the right macros. Make sure to bind the <code>instance_init</code> field of the <code>TypeInfo</code> structure to the <code>&lt;your-soc&gt;_initfn</code> function and the <code>class_init</code> field to the <code>&lt;your-soc&gt;_class_init</code> function.</li>
+<li>
+<p><strong>Task Management</strong>:</p>
+<ul>
+<li>
+<p>FreeRTOS manages different tasks:</p>
+<ul>
+<li>Serial communication monitoring</li>
+<li>LED state control</li>
+<li>System management</li>
 </ul>
 </li>
 </ul>
 </li>
 </ol>
-<blockquote>
-<p>ℹ️ Our code</p>
-<p>You can find our implementation of a SoC in <code>qemu/hw/arm/s32k3x8_soc.c</code> and <code>qemu/include/hw/arm/s32k3x8_soc.h</code>.</p>
-</blockquote>
+<h3 id="code-structure">Code Structure</h3>
+<p>The example code is organized into several key components:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>example_led/
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── FreeRTOSConfig.h    # necessary configurations for FreeRTOS
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── gpio.c              # implementations of a mocked gpio
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── gpio.h     
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── linker.ld     
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>├── lpuart.c            # UART communication implementation
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>├── lpuart.h      
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├── main.c              # Implementation of the task to switch on/off the LED 
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>├── Makefile      
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>└── startup.c           # System initialization
+</code></pre></div>
+<h3 id="testing-the-example">Testing the Example</h3>
+<ol>
+<li>Build and run the project as described in the <a href="../../getting_started/">Installation Guide</a></li>
+<li>Once running, you can interact with the LED through keyboard input with key 1 and 0 </li>
+<li>The LED state will change according to your commands</li>
+</ol>
 
 
 

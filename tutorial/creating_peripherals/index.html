@@ -238,7 +238,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../examples/overview/" class="md-tabs__link">
+        <a href="../../examples/example_led/" class="md-tabs__link">
           
   
   Examples
@@ -391,11 +391,33 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/overview/" class="md-nav__link">
+      <a href="../../examples/example_led/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Overview
+    Interactive led control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/example_morse_code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Morse code decoder implementation
     
   </span>
   
@@ -825,11 +847,13 @@
 
 <h1 id="adding-a-custom-peripheral-to-a-soc-in-qemu-a-practical-example">Adding a Custom Peripheral to a SoC in QEMU: a practical example</h1>
 <p>The following steps will guide you through configuring and implementing the peripheral within QEMU by using a practical example. In our project, we implemented a custom emulation of the LPUART peripheral model of the NXP S32K3X8_EVB board.</p>
-<p>One of the most important challenges in designing this peripheral is deciding how deep the emulation should go. Should it only provide basic register access and pass-through functionality, or should it fully replicate the real hardware’s internal logic, including timeouts, interrupts, and FIFO behavior? The right level of emulation depth depends on the intended use case—whether for software development, debugging, or full-system validation.</p>
-<p>In our example, our scope has been to grant these basic functionalities of the peripheral:
-- register handling and reset 
-- Interrupt management 
-- character device interaction (transmission and reception of bytes)</p>
+<p>One of the most important challenges in designing this peripheral is deciding how deep the emulation should go. Should it only provide basic register access and pass-through functionality, or should it fully replicate the real hardware’s internal logic, including timeouts, interrupts, and FIFO behavior? The right level of emulation depth depends on the intended use case - whether for software development, debugging, or full-system validation.</p>
+<p>In our example, our scope has been to grant these basic functionalities of the peripheral:</p>
+<ul>
+<li>register handling and reset </li>
+<li>Interrupt management </li>
+<li>character device interaction (transmission and reception of bytes)</li>
+</ul>
 <h3 id="implementing-the-peripheral-s32k3x8_usarth">Implementing the Peripheral (<code>s32k3x8_usart.h</code>)</h3>
 <p>In our implementation, we kept the same approach we exploited when adding support for the machine itself. In particular, we used a header file (<code>qemu/include/hw/char/s32k3x8_lpuart.h</code>) to store constants, such as base addresses and reset values we found in the <a href="https://www.docstore.nxp.com/products?path=/content/docstore/product-hierarchy/AMP"><strong>reference manual on the vendor's site</strong></a>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// [...]</span>
@@ -873,7 +897,8 @@
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">};</span>
 </code></pre></div></p>
 <h3 id="implementing-the-peripheral-s32k3x8_usartc">Implementing the Peripheral (<code>s32k3x8_usart.c</code>)</h3>
-<p>The new UART peripheral should be implemented as a C source file inside <code>qemu/hw/char/</code>. The file should include:</p>
+<p>The new UART peripheral should be implemented as a C source file inside <code>qemu/hw/char/</code>. 
+The file should include:</p>
 <ul>
 <li><strong>Initialization functions</strong>: Define how the peripheral is instantiated and registered in QEMU.</li>
 <li><strong>Read/Write functions</strong>: Handle access to memory-mapped registers.</li>
@@ -929,7 +954,6 @@
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w"> </span><span class="n">type_init</span><span class="p">(</span><span class="n">s32k3x8_usart_register_types</span><span class="p">)</span>
 </code></pre></div>
 <p>This process ensures that the peripheral is recognized as a valid QEMU device and can be instantiated in an emulated SoC.</p>
-<p>That's it! You have successfully added a custom peripheral to QEMU.</p>
 <h3 id="registering-the-peripheral-in-the-build-system-of-qemu">Registering the peripheral in the build system of QEMU</h3>
 <p>Refer to our guide about <a href="../building_requirements/">building</a> to get insights on how to include your custom peripheral in your build configurations.</p>
 

@@ -12,7 +12,7 @@
         <link rel="prev" href="..">
       
       
-        <link rel="next" href="../examples/overview/">
+        <link rel="next" href="../examples/example_led/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -240,7 +240,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../examples/overview/" class="md-tabs__link">
+        <a href="../examples/example_led/" class="md-tabs__link">
           
   
   Examples
@@ -516,11 +516,33 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples/overview/" class="md-nav__link">
+      <a href="../examples/example_led/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Overview
+    Interactive led control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/example_morse_code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Morse code decoder implementation
     
   </span>
   
@@ -872,12 +894,14 @@
 <p>To build and view the documentation locally, you'll need to install the required Python packages:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>mkdocs<span class="w"> </span>mkdocs-material
 </code></pre></div>
-<p>Then, from the root of the project:
-- For local development with live reload: <code>mkdocs serve</code>
-- To build the static site: <code>mkdocs build</code></p>
+<p>Then, from the root of the project:</p>
+<ul>
+<li>For local development with live reload: <code>mkdocs serve</code></li>
+<li>To build the static site: <code>mkdocs build</code></li>
+</ul>
 <h2 id="building-qemu">Building QEMU</h2>
 <h3 id="prerequisites">Prerequisites</h3>
-<p>Before building QEMU, ensure you have all required packages installed. Please refer to our <a href="building_requirements.md">building requirements guide</a> for a complete list of dependencies.</p>
+<p>Before building QEMU, ensure you have all required packages installed. Please refer to our <a href="../tutorial/building_requirements/">building requirements guide</a> for a complete list of dependencies.</p>
 <h3 id="build-process">Build Process</h3>
 <ol>
 <li>Navigate to the <code>qemu</code> folder</li>
@@ -905,17 +929,19 @@
 </code></pre></div>
 We've tested with <code>arm-none-eabi-gcc</code> version 10.3 from APT and encountered no issues. The toolchain distributed by APT corresponds to the one indicated by the vendor (NXP) to build code for the target architecture.</p>
 <h3 id="build-process_1">Build Process</h3>
-<p>For each example (<code>example_led</code> or <code>example_morse_code</code>):
-1. Navigate to the example directory
-2. Build the example:
+<p>For each example (<code>example_led</code> or <code>example_morse_code</code>):</p>
+<ol>
+<li>Navigate to the example directory</li>
+<li>Build the example:
    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>make
-</code></pre></div>
-3. Run the example:
+</code></pre></div></li>
+<li>Run the example:
    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>make<span class="w"> </span>run
 </code></pre></div>
    Or for debugging:
    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>make<span class="w"> </span>debug
-</code></pre></div></p>
+</code></pre></div></li>
+</ol>
 <h2 id="key-implementation-files">Key Implementation Files</h2>
 <p>Our custom implementations of emulated HW inside of QEMU can be found in the following files:</p>
 <ul>

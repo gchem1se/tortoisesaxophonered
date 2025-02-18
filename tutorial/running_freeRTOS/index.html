@@ -236,7 +236,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../examples/overview/" class="md-tabs__link">
+        <a href="../../examples/example_led/" class="md-tabs__link">
           
   
   Examples
@@ -389,11 +389,33 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/overview/" class="md-nav__link">
+      <a href="../../examples/example_led/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Overview
+    Interactive led control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/example_morse_code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Morse code decoder implementation
     
   </span>
   
@@ -700,12 +722,16 @@
 <a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="p">};</span>
 </code></pre></div>
 <ul>
-<li><code>vPortSVCHandler</code>, <code>xPortPendSVHandler</code> and <code>xPortSysTickHandler</code> are defined by FreeRTOS codebase itself, in the <code>port.c</code> file you will include in the Makefile.</li>
-<li>The other handlers are up to you to implement. If you have no requirements about those, however, you can leave them unspecified by declaring a function that only runs an infinite loop (except for the <code>Reset_Handler</code>, which has at least to call the real entrypoint of your user code: the <code>main</code> function).</li>
-</ul>
+<li>
+<p><code>vPortSVCHandler</code>, <code>xPortPendSVHandler</code> and <code>xPortSysTickHandler</code> are defined by FreeRTOS codebase itself, in the <code>port.c</code> file you will include in the Makefile.</p>
+</li>
+<li>
+<p>The other handlers are up to you to implement. If you have no requirements about those, however, you can leave them unspecified by declaring a function that only runs an infinite loop (except for the <code>Reset_Handler</code>, which has at least to call the real entrypoint of your user code: the <code>main</code> function).</p>
 </li>
 <li>
 <p>Make sure to declare also (even unspecified) functions <code>SVC_Handler</code> and <code>PendSV_Handler</code>, which will be called by their ported versions <code>vPortSVCHandler</code> and <code>xPortPendSVHandler</code> eventually, so your program will not compile if those are not declared.</p>
+</li>
+</ul>
 </li>
 <li>
 <p>Write a suitable linker script for your project. In particular, make sure to add a <code>.heap</code> section in your RAM and set the <code>ENTRY</code> of your application to the the specific ISR <code>Reset_Handler</code>.</p>

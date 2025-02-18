@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../../examples/overview/">
+        <link rel="prev" href="../../examples/example_morse_code/">
       
       
         <link rel="next" href="../building_requirements/">
@@ -238,7 +238,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../examples/overview/" class="md-tabs__link">
+        <a href="../../examples/example_led/" class="md-tabs__link">
           
   
   Examples
@@ -391,11 +391,33 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/overview/" class="md-nav__link">
+      <a href="../../examples/example_led/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Overview
+    Interactive led control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/example_morse_code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Morse code decoder implementation
     
   </span>
   
@@ -779,12 +801,20 @@
 <p>From this moment on, we will refer to the concept of "class" as it is intended in Java-like programming languages using the term "entity", so that we don't have semantic overlapping with the term "Class" as it is used in the QOM with a different meaning.</p>
 </blockquote>
 <ul>
-<li><strong>States</strong>: variables having type ending in <em>-State</em> are structures used to keep track of the current configuration of the device at runtime. For example, if the Device is a peripheral, its State will contain mostly registers that mimick the HW, maybe interrupt lines, as well as some flags or variables for configuring aspects of the emulation of the peripheral.</li>
+<li><strong>States</strong>: variables having type ending in <em>-State</em> are structures used to keep track of the current configuration of the device at runtime. For example, if the Device is a peripheral, its State will contain mostly registers that mimick the HW, maybe interrupt lines, as well as some flags or variables for configuring aspects of the emulation of the peripheral.<ul>
 <li>The State is sometimes referred to as <em>instance</em>.</li>
-<li><strong>Type</strong>: inside of a <em>Type</em> the developer must insert high-level properties of the entity they want to code: its name, its parent class (for inheritance), its instance size (which corresponds to the <code>sizeof</code> its <em>State</em>), the initialization function for its State and the initialization function for its Class. </li>
+</ul>
+</li>
+<li>
+<p><strong>Type</strong>: inside of a <em>Type</em> the developer must insert high-level properties of the entity they want to code: its name, its parent class (for inheritance), its instance size (which corresponds to the <code>sizeof</code> its <em>State</em>), the initialization function for its State and the initialization function for its Class.</p>
+<ul>
 <li>Once the developer <em>registers</em> the Type using specific macros, they won't explicitly interact with it in the code anymore. Instead, QEMU’s QOM (QEMU Object Model) system uses it internally. What the developer cares about is that registering the Type allows them to specify the parent class for inheritance and ensures that the object will be instantiated by using the function <code>object_new(&lt;type.name&gt;)</code>.</li>
 <li>In the end, every HW component which is part of the emulated environment in QEMU inherits from the <em>Device</em> Type, explicitly or indirectly.</li>
-<li><strong>Classes</strong>: Every Type has an associated <em>Class</em>. The Class is a structure holding function pointers; basically, the developer must put inside the Class pointers to <em>methods</em> of the entity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Classes</strong>: Every Type has an associated <em>Class</em>. The Class is a structure holding function pointers; basically, the developer must put inside the Class pointers to <em>methods</em> of the entity.</p>
+</li>
 </ul>
 <h5 id="example-a-simplfied-uart">Example: a simplfied UART</h5>
 <p>Let's see the QOM in action when implementing in a simplified example of constructing a simplified <strong>UART</strong> entity:</p>

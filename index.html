@@ -238,7 +238,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="examples/overview/" class="md-tabs__link">
+        <a href="examples/example_led/" class="md-tabs__link">
           
   
   Examples
@@ -475,11 +475,33 @@
   
   
     <li class="md-nav__item">
-      <a href="examples/overview/" class="md-nav__link">
+      <a href="examples/example_led/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Overview
+    Interactive led control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="examples/example_morse_code/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Morse code decoder implementation
     
   </span>
   
@@ -789,11 +811,13 @@
 <h1 id="qemu-board-support-implementation-project">QEMU Board Support Implementation Project</h1>
 <p>Welcome to the documentation of our Computer Architectures and Operating Systems course project. This project focuses on implementing support for a new board in QEMU, including peripheral emulation and FreeRTOS integration.</p>
 <h2 id="project-overview">Project Overview</h2>
-<p>The project implements:
-- Custom board support in QEMU
-- Emulation of LPUART and GPIO peripherals
-- Example applications showcasing the implemented features
-- FreeRTOS integration with the custom board</p>
+<p>The project implements:</p>
+<ul>
+<li>Custom board support in QEMU</li>
+<li>Emulation of LPUART and GPIO peripherals</li>
+<li>Example applications showcasing the implemented features</li>
+<li>FreeRTOS integration with the custom board</li>
+</ul>
 <h2 id="project-structure">Project Structure</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>├── docs            # Documentation of the project 
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── example_led/    # Example code 1: switching on and off of a mocked led using a GPIO and LPUART 
@@ -805,7 +829,7 @@
 <h2 id="quick-links">Quick Links</h2>
 <ul>
 <li><a href="getting_started/">Getting Started Guide</a> - Instructions for building QEMU and the example applications to replicate our work and get the project running</li>
-<li><a href="examples/overview/">Example Applications</a> - Documentation of our example applications and how to run them</li>
+<li><a href="examples/example_led/">Example 1</a> and <a href="examples/example_morse_code/">Example 2</a> - Documentation of our example applications and how to run them</li>
 </ul>
 <h2 id="about-this-repository">About This Repository</h2>
 <p>This repository is the result of migrating our project from GitHub to GitLab. For reference, here are the username mappings between platforms:</p>
@@ -815,7 +839,7 @@
 <li><code>7i77ux</code> - Calogero Maria </li>
 <li><code>v1m4te</code> - Matteo Rizzo </li>
 </ul>
-<p>The documentation of the project is available as a website built with MkDocs and is currently hosted at https://gchem1se.github.io/tortoisesaxophonered/. We initially attempted to use GitLab Pages for hosting, but due to runner availability constraints, we opted for an alternative hosting solution.</p>
+<p>The documentation of the project is available as a website built with MkDocs and is currently hosted on <a href="https://gchem1se.github.io/tortoisesaxophonered/">Github Pages</a>. We initially attempted to use GitLab Pages for hosting, but due to runner availability constraints, we opted for an alternative hosting solution.</p>
 <h2 id="license">License</h2>
 <p>Both this documentation website and the associated work are licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).</p>
 <p>You can find the complete license text <a href="https://creativecommons.org/licenses/by-nc/4.0/">here</a>.</p>
